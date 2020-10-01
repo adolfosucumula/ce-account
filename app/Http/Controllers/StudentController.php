@@ -17,6 +17,7 @@ use App\Models\ModelIdentity;
 use App\Models\ModelContact;
 use App\Models\ModelClass;
 use App\Models\ModelCourse;
+use App\Models\ModelQuota;
 
 class StudentController extends Controller
 {
@@ -131,6 +132,33 @@ class StudentController extends Controller
             ]);
             
             if($w){
+                $objQuota = new ModelQuota();
+
+                $r =0;
+                for($a=$request->init;$a <= $request->quotation;$a++){
+                    $r ++;
+                    $rs = $objQuota->create([
+                        'student_id'=>$w->id_student,
+                        'user_id'=>Auth::user()->id,
+                        'price'=>0,
+                        'ticket'=>"",
+                        'ticket_date'=>"2020-01-01",
+                        'payment_method'=>"indefinido",
+                        'bank'=>"indefinido",
+                        'academic_year'=>date('Y'),
+                        'quarter_reference'=>$a,
+                        'date_payment'=>date('Y-m-d'),
+                        'month_payment'=>date('m'),
+                        'day_payment'=>date('d'),
+                        'signature'=>"Default",
+                        'order_code'=>"00",
+                        'state'=>"OFF",
+                        'created_at'=>date('Y-m-d H:i:s')
+                    ]);
+                }
+                if($r===$request->quotation){
+
+                }
                 return redirect()->route('stud');
             }else{
                 return redirect()->back()->withInput()->withErrors(['Falha ao cadastrar registo!']);
@@ -189,7 +217,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo 1;
     }
 
     /**

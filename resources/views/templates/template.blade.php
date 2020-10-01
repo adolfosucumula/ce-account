@@ -126,13 +126,13 @@
             </a>
           </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="{{route('bill')}}">
+            <a class="nav-link" href="{{route('quot')}}">
               <span class="fa fa-money" class="fa fa-shopping-cart" data-feather="shopping-cart"></span>
               Propina
             </a>
-            <a class="nav-link" href="{{route('bill.new')}}">
+            <a class="nav-link" href="">
               <span class="fa fa-usd" data-feather="shopping-cart"></span>
-              Pagar Propina
+              Historico de Propina
             </a>
           </li>
         </ul>

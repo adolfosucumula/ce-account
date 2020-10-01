@@ -98,6 +98,12 @@
           <input type="text" class="form-control" id="period" name="period" placeholder="01" value="" >
           
       </div>
+      <div class=" mb-3">
+          <label for="country">Mensalidades</label>
+          <input type="number" class="form-control" id="quotation" name="quotation" placeholder="1" value="12" required>
+          
+          A partir do mês nº <input type="number" class="form-control" id="init" name="init" placeholder="1" value="2" required>
+      </div>
 
       
     </div>

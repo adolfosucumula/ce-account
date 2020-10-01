@@ -31,6 +31,7 @@ class CreateModelQuotasTable extends Migration
             $table->string('day_payment');
             $table->string('signature');
             $table->string('order_code');
+            $table->string('state');
             $table->timestamps();
         });
     }

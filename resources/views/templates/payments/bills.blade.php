@@ -5,8 +5,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">@isset($title) {{$title}} @endisset</h1>
 
-        <a class="btn btn-success btn-sm" href="{{route('bill.new')}}" >Novo </a>
-        <a class="btn btn-primary btn-sm" href="{{route('bill')}}" >Tabela </a>
+        <a class="btn btn-primary btn-sm" href="{{route('quot')}}" >Tabela </a>
         
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
@@ -50,8 +49,13 @@
               <td>{{$bill->ticket}}</td>
               <td>{{$bill->ticket_date}}</td>
               <td>
-              <a href="bills">
-                  <button class="btn btn-primary btn-sm" >Pagar</button> </a>
+              <a> 
+                  <form  action="{{ route('quot.extract') }}" method="POST" >
+                                        @csrf
+                      <input type="hidden" name="code" value="{{$bill->relStudent->id_student}}" />
+                      <button class="btn btn-primary btn-sm" >Pagar</button>
+                  </form>
+                </a>
                 <!--<a href="">
                   <button class="btn btn-dark btn-sm" >Visualizar</button> </a>
                 <a href="">

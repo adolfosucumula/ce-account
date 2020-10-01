@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-        .container{
+        .card-body{
         background-image: url({{url('assets/images/login-page.jpg')}})
       }
     </style>

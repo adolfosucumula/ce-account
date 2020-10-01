@@ -28,7 +28,7 @@ class ModelStudent extends Model
         return $this->hasOne('App\Models\ModelPeople','id_people','people_id');
     }
     public function relClass(){
-        return $this->belongsTo('App\Models\ModelClass','id_class','class_id');
+        return $this->hasOne('App\Models\ModelClass','id_class','class_id');
     }
     public function relUser(){
         return $this->belongsTo('App\Models\ModelUsers','id','user_id');

@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');*/
+
+Auth::routes();
+
 Route::post('/user/signin', 'UserController@doLogin')->name('login.do');
 
 Route::get('/', 'UserController@index')->name('user.login');
@@ -38,21 +41,25 @@ Route::post('/province/showcities','ProvinceController@getcities');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/student', 'StudentController@index')->name('stud');
 Route::get('/student/add', 'StudentController@create')->name('stud.new');
 Route::post('/student/insert', 'StudentController@store')->name('stud.add');
 Route::post('/student/searchBy', 'StudentController@selectBy')->name('stud.search');
+Route::put('/students/{id}/update', 'StudentController@update');
 Route::post('/student/getStudentByNif', 'StudentController@selectNIF');
-
 Route::resource('/students', 'StudentController');
 
 Route::get('/class', 'ClassController@index')->name('class');
 Route::post('/class/showgrades', 'ClassController@getGrades')->name('class');
 
-Route::get('/bills', 'QuotaController@index')->name('bill');
-Route::get('/bills/add', 'QuotaController@create')->name('bill.new');
-Route::post('/bills/insert', 'QuotaController@store')->name('bill.add');
+
+Route::get('/quota', 'QuotaController@index')->name('quot');
+Route::get('/quota/add', 'QuotaController@create')->name('quot.new');
+Route::post('/quota/insert', 'QuotaController@store')->name('quot.add');
+Route::post('/quota/getHistoric', 'QuotaController@getStudentQuota')->name('quot.extract');
+Route::post('/quota/editquota', 'QuotaController@editStudentQuota')->name('quot.edit');
+Route::put('/quota/{id}/update', 'QuotaController@update');
+Route::post('/quota/updatequota', 'QuotaController@updateStudentQuota')->name('quota.stud.update');
+
+
+

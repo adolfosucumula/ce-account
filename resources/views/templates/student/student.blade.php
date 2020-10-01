@@ -19,8 +19,19 @@
           </button>
         </div>
       </div>
+      
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h2>@isset($subtitle) {{$subtitle}} @endisset</h2>
+          
+          @if(isset($errors) && count($errors)>0)
+            @foreach($errors->all() as $error)
+              <span class=" alert-danger">
+              {{$error}}
+              </span>
+            @endforeach
+          @endif
 
-      <h2>@isset($subtitle) {{$subtitle}} @endisset</h2>
+        </div>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
         @csrf
@@ -59,11 +70,16 @@
                @endforeach
               </td>
               <td>
-              <a href="students/{{$student->id_student}}/edit">
+              <!--<a href="students/{{$student->id_student}}/edit">
                   <button class="btn btn-primary btn-sm" >Editar</button> </a>
-                <!--<a href="student/{{$student->id_student}}">
-                  <button class="btn btn-dark btn-sm" >Visualizar</button> </a>
-                <a href="student/{{$student->id_student}}/edit">
+                <a> -->
+                  <form  action="{{ route('quot.extract') }}" method="POST" >
+                                        @csrf
+                      <input type="hidden" name="code" value="{{$student->id_student}}" />
+                      <button class="btn btn-dark btn-sm" >Propina</button>
+                  </form>
+                </a>
+                <!--<a href="student/{{$student->id_student}}/edit">
                   <button class="btn btn-primary btn-sm" >Editar</button> </a>
                 <a id="{{$student->id_student}}">
                   <button class="btn btn-danger btn-sm" >Apagar</button> </a>-->

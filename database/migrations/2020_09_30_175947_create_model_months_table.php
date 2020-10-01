@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModelCategoryCoursesTable extends Migration
+class CreateModelMonthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateModelCategoryCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_category_courses', function (Blueprint $table) {
-            $table->increments('id_category');
-            $table->string('category');
-            $table->string('code_');
+        Schema::create('model_months', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateModelCategoryCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model_category_courses');
+        Schema::dropIfExists('model_months');
     }
 }

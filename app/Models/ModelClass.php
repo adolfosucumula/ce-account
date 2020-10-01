@@ -19,4 +19,7 @@ class ModelClass extends Model
     public function relGrade(){
         return $this->hasOne('App\Models\ModelGrade','id_grade','grade_id');
     }
+    public function relStudent(){
+        return $this->belongsTo('App\Models\ModelStudent','id_class','class_id');
+    }
 }
