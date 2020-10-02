@@ -4,11 +4,27 @@
  
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">@isset($title) {{$title}} @endisset</h1>
-
-        <a class="btn btn-success btn-sm" href="{{route('new.worker')}}" >Cadastrar </a>
-        <a class="btn btn-primary btn-sm" href="{{route('workerHome')}}" >Tabela </a>
         
         <div class="btn-toolbar mb-2 mb-md-0">
+        @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                          && $list['insert'] ==='1' )
+                          <a class="btn btn-success btn-sm" href="{{route('new.worker')}}" >Cadastrar  </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+
+                  @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                          && $list['select'] ==='1' )
+                          <a class="btn btn-primary btn-sm" href="{{route('workerHome')}}" >Tabela </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
@@ -58,12 +74,40 @@
                @endforeach
               </td>
               <td>
-                <a href="worker/{{$worker->id_worker}}">
+               
+                  @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                          && $list['select'] ==='1' )
+                          <a href="worker/{{$worker->id_worker}}">
                   <button class="btn btn-dark btn-sm" >Visualizar</button> </a>
-                <a href="worker/{{$worker->id_worker}}/edit">
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+
+                  @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                          && $list['update'] ==='1' )
+                          <a href="worker/{{$worker->id_worker}}/edit">
                   <button class="btn btn-primary btn-sm" >Editar</button> </a>
-                <a id="{{$worker->id_worker}}">
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+
+                  @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                          && $list['delete'] ==='1' )
+                      <a id="{{$worker->id_worker}}"> 
                   <button class="btn btn-danger btn-sm" >Apagar</button> </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+                
               </td>
             </tr>
             

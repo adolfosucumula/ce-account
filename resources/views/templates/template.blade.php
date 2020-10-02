@@ -7,7 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>AcaGest</title>
+    <title>NetAcad</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{url('assets/logos/acagest/apple-icon-57x57.png')}}">
 <link rel="apple-touch-icon" sizes="60x60" href="{{url('assets/logos/acagest/apple-icon-60x60.png')}}">
@@ -44,7 +44,9 @@
         -ms-user-select: none;
         user-select: none;
       }
-
+      .username{color:blue;
+      font-weight:bold
+      }
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -56,7 +58,7 @@
   </head>
   <body> 
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-md">
-  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Esperanca</a>
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/"> NetAcad</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -66,10 +68,10 @@
       <a class="nav-link" href="#">...</a>
     </li>
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">
-        @if(session()->exists('username'))
+      <a class="nav-link " href="#" >
+        <span class="username">
         {{ Auth::user()->name }}
-        @endif
+        </span>
       </a>
     </li>
     <li class="nav-item text-nowrap">
@@ -83,29 +85,35 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
-          <!--<li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
+        @if(Session::exists('AccessPage'))
+
+        <li class="nav-item">
+          @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1 )
+                          <a class="nav-link" href="{{route('workerHome')}}">
+              <span class="fa fa-users"></span>
+              Funcionario
             </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+            
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Products
-            </a>
-          </li>-->
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('stud')}}">
-              <span class="fa fa-users" data-feather="users"></span>
+          @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Student" && $list['allowed'] ===1 )
+                          <a class="nav-link" href="{{route('stud')}}">
+              <span class="fa fa-users"></span>
               Estudantes
             </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+            
           </li>
           <!--<li class="nav-item">
             <a class="nav-link" href="{{route('workerHome')}}">
@@ -126,15 +134,29 @@
             </a>
           </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="{{route('quot')}}">
-              <span class="fa fa-money" class="fa fa-shopping-cart" data-feather="shopping-cart"></span>
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Quota" && $list['allowed'] ===1 )
+                      <a class="nav-link" href="{{route('quot')}}">
+              <span class="fa fa-shopping-cart"></span>
               Propina
             </a>
-            <a class="nav-link" href="">
-              <span class="fa fa-usd" data-feather="shopping-cart"></span>
+                        @break
+                      @endif
+                    @endforeach
+            
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Quota" && $list['allowed'] ===1
+                        && $list['select'] ==='1' )
+                      <a class="nav-link" href="">
+              <span class="fa fa-usd" ></span>
               Historico de Propina
             </a>
+                        @break
+                      @endif
+                    @endforeach
+            
           </li>
+          @endif
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -144,6 +166,7 @@
           </a>
         </h6>
         <ul class="nav flex-column mb-2">
+        @if(Session::exists('AccessPage'))
           <!--<li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text"></span>
@@ -168,6 +191,7 @@
               Year-end sale
             </a>
           </li>-->
+          @endif
         </ul>
       </div>
     </nav>

@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\ModelUsers;
+use App\Models\ModelAccessPage;
 
 class UserController extends Controller
 {
     private $objUser;
 
     public function __construct(){
+        $this->objAccess = new ModelAccessPage();
         $this->objUser = new ModelUsers(); 
     }
     public function index()
@@ -23,7 +25,7 @@ class UserController extends Controller
             return view('templates.user.loginPage');
             
         }
-        return redirect()->route('workerHome');
+        return redirect()->route('home');
     }
 
     /**
@@ -101,33 +103,51 @@ class UserController extends Controller
     }
     public function doLogin(Request $request){
         
-        if(!filter_var($request->inputEmail, FILTER_VALIDATE_EMAIL)){
+        $valid = $request->validate([
+            'Email'=>'required|email',
+            'Password'=>'required'
+        ]);
+        
+        if(!filter_var($request->Email, FILTER_VALIDATE_EMAIL)){
             echo json_encode(['sms'=>'Digite um email válido!']);
         }else{
             $credentials = [
-                'email'=>$request->inputEmail,
-                'password'=>$request->inputPassword
+                'email'=>$request->Email,
+                'password'=>$request->Password
             ];
-    
+          
             if(Auth::attempt($credentials)){
 
-                $data = Auth::user();
+               $accesses = $this->objAccess->where('user_id',Auth::user()->id)->get();
 
-                Session::put([
-                    'id_user'=>$data->id,
-                    'username'=>$data->name,
-                    'email'=>$data->email,
-                    'accessController'=>$this->objUser->find($data->id)->relAccessPages
-                ]);
+               if(count($accesses) > 0){
+                    foreach($accesses as $access){
+                        foreach($access->relPage as $page)
+                        {
+                            Session::push('AccessPage',
+                                array('code'=>$access->id_access,'page'=>$page->page,
+                                    'pageID'=>$access->page_id,'userID'=>$access->user_id,
+                                    'allowed'=>$access->allowed,'insert'=>$access->insert_,
+                                    'update'=>$access->update_,'delete'=>$access->delete_,
+                                    'select'=>$access->select_
+                                    )
+                            );
+                        }
+                    }
+                }
                 
-                echo json_encode(['rs'=>1]);
+                //echo json_encode(['rs'=>1]);
+                return redirect()->route('home');
+                
             }else{
                 $data = [
                     'rs'=>0,
                     'sms'=>'Usuário e/ou senha errada!'
                 ];
-                echo json_encode($data);
+                //echo json_encode($data);
+                return redirect()->back()->withInput()->withErrors(['Usuario e/ou senha errada!']);
             }
+            
         }
 
     }

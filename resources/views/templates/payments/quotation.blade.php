@@ -5,10 +5,17 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">@isset($title) {{$title}} @endisset</h1>
 
-        <a class="btn btn-success btn-sm" href="{{route('stud.new')}}" >Cadastrar </a>
-        <a class="btn btn-primary btn-sm" href="{{route('stud')}}" >Tabela </a>
-        
         <div class="btn-toolbar mb-2 mb-md-0">
+    
+                  @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Quota" && $list['allowed'] ===1
+                          && $list['select'] ==='1' )
+                          <a class="btn btn-primary btn-sm" href="{{route('stud')}}" >Lista Geral </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
@@ -28,13 +35,24 @@
           {{$quota->relStudent->relPeople->firstname}} {{$quota->relStudent->relPeople->lastname}}
           ({{$quota->relStudent->relPeople->relIdentity->identity}}/{{$quota->relStudent->code_student}})
           -Turma: {{$quota->relStudent->relClass->class}}
+          /Ano: {{$quota->academic_year}}
             @if($loop->iteration===1)
               @break
             @endif
           @endforeach
           @endif
           </h5>
-        <button type="submit" class="btn btn-primary btn-sm" >Atualizar</button>
+
+          @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Quota" && $list['allowed'] ===1
+                          && $list['update'] ==='1' )
+                          <button type="submit" class="btn btn-primary btn-sm" >Atualizar</button>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+        
         </div>
       <div class="table-responsive">
       

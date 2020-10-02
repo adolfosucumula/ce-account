@@ -7,7 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login | Acagest</title>
+    <title>Login | NetAcad</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{url('assets/logos/acagest/apple-icon-57x57.png')}}">
 <link rel="apple-touch-icon" sizes="60x60" href="{{url('assets/logos/acagest/apple-icon-60x60.png')}}">
@@ -37,7 +37,7 @@
       body{
         background-image: url({{url('assets/images/login-page.jpg')}})
       }
-      .error{color:red;}
+      .error{color:red;border-radius:4px;padding:2%;background:white;}
       
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -58,24 +58,37 @@
     <link href="{{url('assets/bootstrap-4.5.2/signin.css')}}" rel="stylesheet">
   </head>
   <body class="text-center">
-
-    <form id="" name="login"  class="needs-validation form-signin" novalidate>
+  <!--<form id="" name="login"  class="needs-validation form-signin" novalidate>-->
+    <form id="" name="login" method="post" action="{{route('login.do')}}"  class="needs-validation form-signin" novalidate>
   @csrf
   <img class="mb-4" src="{{url('assets/logos/logo-2078018_640.png')}}" alt="" width="130" height="130">
   <h1 class="h3 mb-3 font-weight-normal" style="color:#fff">Login</h1>
+  
   <label for="inputEmail" class="sr-only">Email</label>
-  <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email " required autofocus>
+  <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email " required autofocus>
   <div class="invalid-feedback">
             Este campo e obrigatorio.
           </div>
+  @error('Email')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+  <input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Password" required>
   <div class="invalid-feedback">
             Este campo e obrigatorio.
           </div>
+  @error('Password')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
   <div class="checkbox mb-3">
     <label>
-      <div class="error"></div>
+    @if(isset($errors) && count($errors)>0)
+      @foreach($errors->all() as $error)
+      <span class="error">
+        {{$error}}
+        </span>
+      @endforeach
+    @endif
       <label style="color:#fff">
         <input type="checkbox" value="remember-me"> Lembrar-me
       </label>
@@ -92,7 +105,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 
   <script src="{{url('assets/jquery/jquery-1.12.4.js')}}"></script>
-  <script src="{{url('assets/scripts/auth.js')}}"></script>
+  <script src="{{url('assets/scripts/auth.j')}}"></script>
 </body>
 <script>
 

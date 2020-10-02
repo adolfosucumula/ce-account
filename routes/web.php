@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');*/
+*/
+Route::get('/home', 'HomeController@home')->name('home');
 
 Auth::routes();
 
@@ -38,8 +38,6 @@ Route::resource('/worker', 'WorkerController');
 Route::post('/country/showprovinces','CountryController@getprovinces');
 
 Route::post('/province/showcities','ProvinceController@getcities');
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/student', 'StudentController@index')->name('stud');
 Route::get('/student/add', 'StudentController@create')->name('stud.new');

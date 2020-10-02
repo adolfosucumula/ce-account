@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function home()
+    {   
+        /*if(Auth::check() === false){
+            return view('templates.user.loginPage');
+        }*/
+        return view('templates.home');
+    }
 }

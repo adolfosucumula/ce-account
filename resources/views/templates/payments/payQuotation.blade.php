@@ -30,7 +30,7 @@
 
         @if(isset($errors) && count($errors)>0)
           @foreach($errors->all() as $error)
-            <span class="alert alert-danger">
+            <span class=" alert-danger">
             {{$error}}
             </span><br/><br/>
           @endforeach
@@ -102,10 +102,13 @@
         <div class="row">
             <div class="col-md-3 mb-3">
               <label for="country">Processo</label>
-              <input type="text" class="form-control"  id="order_number" name="order_number" value="{{$orderNumber ?? '001'}}" required>
+              <input type="text" class="form-control"  id="order_code" name="order_code" value="{{$orderNumber ?? '001'}}" required>
               <div class="invalid-feedback">
               Este campo e obrigatorio.
               </div>
+              @error('order_code')
+                  <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
           <div class="col-md-3 mb-3">
               <label for="zip">ID</label>

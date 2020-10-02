@@ -256,13 +256,18 @@ class QuotaController extends Controller
     public function updateStudentQuota(Request $request){
 
         if(Auth::check()===true){
+            /*$request->validate([
+                'order_code'=>'required|unique:model_quotas'
+            ]);*/
+
             $this->objQuota->setTicket($request->ticket);
             $this->objQuota->setTicketDate($request->ticketDate);
             $this->objQuota->setBank($request->bank);
             $this->objQuota->setAcademicYear($request->academicYear);
 
             if($this->objQuotaRule->validateTicket($this->objQuota) > 0 ){
-                return redirect()->back()->withInput()->withErrors(['O talão de pagamento já foi registado!']);
+                return redirect()->route('stud');
+                //return redirect()->back()->withInput()->withErrors(['O talão de pagamento já foi registado!']);
             }else{
 
                 try {
@@ -281,7 +286,7 @@ class QuotaController extends Controller
                             'month_payment'=>date('m'),
                             'day_payment'=>date('d'),
                             'signature'=>$request->signature,
-                            'order_code'=>$request->order_number,
+                            'order_code'=>$request->order_code,
                             'state'=>'ON',
                             'updated_at'=>date('Y-m-d H:i:s')
                         ]);
@@ -290,7 +295,8 @@ class QuotaController extends Controller
                     if($rs){
                         return redirect('quota');
                     }else{
-                        return redirect()->back()->withInput()->withErrors(['Falha ao cadastrar registo!']);
+                        redirect()->route('stud');
+                        //return redirect()->back()->withInput()->withErrors(['Falha ao cadastrar registo!']);
                         //return redirect('new_work'); 
                     }
                 } catch (\Throwable $th) {
