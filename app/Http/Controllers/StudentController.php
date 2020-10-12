@@ -32,6 +32,8 @@ class StudentController extends Controller
     private $objCourse;
     
     public function __construct(){
+        
+        $this->middleware('auth');
 
         $this->objStudent = new ModelStudent();
         $this->objPeople = new ModelPeople();
@@ -47,7 +49,7 @@ class StudentController extends Controller
     {
         if(Auth::check()===true){
             $data = [
-                'datalist'=>$this->objStudent->all(),
+                'datalist'=>$this->objStudent->paginate(10),
                 'title'=>'Estudantes',
                 'subtitle'=>'Lita Geral'
             ];

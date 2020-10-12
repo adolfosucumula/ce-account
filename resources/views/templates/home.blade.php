@@ -21,9 +21,10 @@
     
     <footer class="main-footer">
     <strong>Copyright &copy; 2019-2020 <a href="javascript:;">Unotec - Solutions</a>.</strong>
-    All rights reserved.
+    All rights reserved.<br/>
+    <b>Versão 1.0</b>
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0-pre
+      
     </div>
   </footer>
 </div>

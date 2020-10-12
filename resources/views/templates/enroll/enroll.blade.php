@@ -8,9 +8,9 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         @if(Session::exists('AccessPage'))
                     @foreach(Session::get('AccessPage') as $list)
-                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                      @if( $list['page'] ==="Enrolls" && $list['allowed'] ===1
                           && $list['insert'] ==='1' )
-                          <a class="btn btn-success btn-sm" href="{{route('stud.new')}}" >Cadastrar  </a>
+                          <a class="btn btn-success btn-sm" href="{{route('enrolls.new')}}" >Cadastrar  </a>
                         @break
                       @endif
                     @endforeach
@@ -18,9 +18,9 @@
 
                   @if(Session::exists('AccessPage'))
                     @foreach(Session::get('AccessPage') as $list)
-                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                      @if( $list['page'] ==="Enrolls" && $list['allowed'] ===1
                           && $list['select'] ==='1' )
-                          <a class="btn btn-primary btn-sm" href="{{route('stud')}}" >Lista Geral </a>
+                          <a class="btn btn-primary btn-sm" href="{{route('enrolls')}}" >Lista Geral </a>
                         @break
                       @endif
                     @endforeach
@@ -48,7 +48,7 @@
   </div>
 
   @if(isset($action) && $action===1)
-    <form id="addStudent" method="POST" action="{{route('stud.add')}}" class="needs-validation" novalidate>
+    <form id="addStudent" method="POST" action="{{route('enrolls.add')}}" class="needs-validation" novalidate>
   @elseif(isset($action) && $action===2)
     <form id="editStudent" method="POST" action="{{url('students/$datalist->id_student')}}" class="needs-validation" novalidate>
       @method('PUT')

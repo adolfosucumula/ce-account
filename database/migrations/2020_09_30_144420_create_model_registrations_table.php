@@ -21,7 +21,7 @@ class CreateModelRegistrationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('level')->nullable();
             $table->string('course')->nullable();
-            $table->string('classe')->nullable();
+            $table->string('class')->nullable();
             $table->string('grade')->nullable();
             $table->double('price',10,2)->nullable();
             $table->string('ticket')->nullable();

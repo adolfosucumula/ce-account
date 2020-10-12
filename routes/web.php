@@ -59,5 +59,7 @@ Route::post('/quota/editquota', 'QuotaController@editStudentQuota')->name('quot.
 Route::put('/quota/{id}/update', 'QuotaController@update');
 Route::post('/quota/updatequota', 'QuotaController@updateStudentQuota')->name('quota.stud.update');
 
-
+Route::get('/enroll', 'RegistrationController@index')->name('enrolls');
+Route::get('/enroll/add', 'RegistrationController@create')->name('enrolls.new');
+Route::post('/enroll/insert', 'RegistrationController@store')->name('enrolls.add');
 

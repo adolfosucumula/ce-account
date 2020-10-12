@@ -8,26 +8,27 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         @if(Session::exists('AccessPage'))
                     @foreach(Session::get('AccessPage') as $list)
-                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                      @if( $list['page'] ==="Enrolls" && $list['allowed'] ===1
                           && $list['insert'] ==='1' )
-                          <a class="btn btn-success btn-sm" href="{{route('stud.new')}}" >Cadastrar  </a>
+                          <a class="btn btn-success btn-sm" href="{{route('enrolls.new')}}" >Cadastrar  </a>
                         @break
                       @endif
                     @endforeach
                   @endif
 
-                  @if(Session::exists('AccessPage'))
+                  
+          <div class="btn-group mr-2">
+          @if(Session::exists('AccessPage'))
                     @foreach(Session::get('AccessPage') as $list)
-                      @if( $list['page'] ==="Worker" && $list['allowed'] ===1
+                      @if( $list['page'] ==="Enrolls" && $list['allowed'] ===1
                           && $list['select'] ==='1' )
-                          <a class="btn btn-primary btn-sm" href="{{route('stud')}}" >Lista Geral </a>
+                          <a  href="{{route('enrolls')}}" class="btn btn-sm btn-outline-secondary"><span data-feather="grid"></span></a>
+            <a  href="{{route('enrolls')}}" class="btn btn-sm btn-outline-secondary"><span data-feather="list"></span></a>
                         @break
                       @endif
                     @endforeach
                   @endif
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar"></span>

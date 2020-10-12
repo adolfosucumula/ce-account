@@ -30,6 +30,8 @@ class WorkerController extends Controller
 
     public function __construct(){
 
+        $this->middleware('auth');
+        
         $this->objPeople = new ModelPeople();
         $this->objIdentity = new ModelIdentity();
         $this->objContact = new ModelContact();
@@ -43,7 +45,7 @@ class WorkerController extends Controller
     {
         if(Auth::check()===true){
             $data = [
-                'datalist'=>$this->objWorker->all()->sortByDesc('id_worker'),
+                'datalist'=>$this->objWorker->paginate(10),
                 'title'=>'Trabalhadores',
                 'subtitle'=>'Lita Geral'
             ];

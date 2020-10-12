@@ -116,6 +116,7 @@
           @endisset
           </tbody>
         </table>
+        {{ $datalist->links() }}
       </div>
 
 @endsection

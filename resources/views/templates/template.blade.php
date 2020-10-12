@@ -47,6 +47,15 @@
       .username{color:blue;
       font-weight:bold
       }
+      .main{
+        text-align:center;
+        margin-top:1%
+    }
+    span{color:#ccc}
+    img{
+      max-width:300px;
+      max-height:300px;
+    }
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -55,6 +64,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{{url('assets/bootstrap-4.5.2/dashboard.css')}}" rel="stylesheet">
+    <link href="{{url('assets/css/mdb.min.css')}}" rel="stylesheet">
   </head>
   <body> 
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-md">
@@ -108,6 +118,20 @@
                           <a class="nav-link" href="{{route('stud')}}">
               <span class="fa fa-users"></span>
               Estudantes
+            </a>
+                        @break
+                      @endif
+                    @endforeach
+                  @endif
+            
+          </li>
+          <li class="nav-item">
+          @if(Session::exists('AccessPage'))
+                    @foreach(Session::get('AccessPage') as $list)
+                      @if( $list['page'] ==="Enrolls" && $list['allowed'] ===1 )
+                          <a class="nav-link" href="{{route('enrolls')}}">
+              <span class="fa fa-users"></span>
+              Matrículas
             </a>
                         @break
                       @endif
